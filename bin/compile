@@ -124,29 +124,29 @@ if test "$CUR_RELEASE" != "$APP_RELEASE" ; then
   fi
 fi
 
+##
+## Build the meteor app!
+##
+#echo "-----> Bundling bundle"
+#cd $APP_SOURCE_DIR
 #
-# Build the meteor app!
-#
-echo "-----> Bundling bundle"
-cd $APP_SOURCE_DIR
-
-# Determine if we have --server-only flag capability. Allow non-zero return from grep.
-echo "-----> Checking if this meteor version supports --server-only"
-set +e
-HAS_SERVER_ONLY=`HOME=$METEOR_DIR $METEOR help build | grep -e '--server-only'`
-set -e
-if [ -n "$HAS_SERVER_ONLY" ] ; then
-  SERVER_ONLY_FLAG='--server-only'
-else
-  SERVER_ONLY_FLAG=""
-fi
-# Remove the Android platform if we don't support the --server-only flag.  iOS
-# platform gets ignored properly.
-if [ -z "$SERVER_ONLY_FLAG" ]; then
-  echo "-----> Attempting to remove android platform."
-  HOME=$METEOR_DIR $METEOR remove-platform android || true
-  echo "-----> Moving on."
-fi
+## Determine if we have --server-only flag capability. Allow non-zero return from grep.
+#echo "-----> Checking if this meteor version supports --server-only"
+#set +e
+#HAS_SERVER_ONLY=`HOME=$METEOR_DIR $METEOR help build | grep -e '--server-only'`
+#set -e
+#if [ -n "$HAS_SERVER_ONLY" ] ; then
+#  SERVER_ONLY_FLAG='--server-only'
+#else
+#  SERVER_ONLY_FLAG=""
+#fi
+## Remove the Android platform if we don't support the --server-only flag.  iOS
+## platform gets ignored properly.
+#if [ -z "$SERVER_ONLY_FLAG" ]; then
+#  echo "-----> Attempting to remove android platform."
+#  HOME=$METEOR_DIR $METEOR remove-platform android || true
+#  echo "-----> Moving on."
+#fi
 
 # If we use npm on root, run npm install.
 if [ -e "$APP_SOURCE_DIR"/package.json ]; then
